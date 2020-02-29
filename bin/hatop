@@ -224,7 +224,7 @@ HAPROXY_INFO_RE = {
 'node':             re.compile('^node:\s*(?P<value>\S+)'),
 }
 
-HAPROXY_STAT_MAX_SERVICES = 100
+HAPROXY_STAT_MAX_SERVICES = 1000
 HAPROXY_STAT_LIMIT_WARNING = '''\
 Warning: You have reached the stat parser limit! (%d)
 Use --filter to parse specific service stats only.
