@@ -1,22 +1,6 @@
-*************
-Documentation
-*************
-
-*HATop is an interactive ncurses client for HAProxy*
-
-    Author:  John Feuerstein <john@feurix.com>
-
-    License: GPLv3
-
-    Project URL: http://feurix.org/projects/hatop/
-
-    Mirror URL: http://code.google.com/p/hatop/
-
-    Development URL: http://labs.feurix.org/admin/hatop/
-
-
-What is HATop?
-==============
+*************************************************
+HATop - An Interactive ncurses Client for HAProxy
+*************************************************
 
 HATop is an interactive ncurses client and real-time monitoring,
 statistics displaying tool for the HAProxy TCP/HTTP load balancer.
@@ -177,7 +161,7 @@ In multiple modes
 -----------------
 ::
 
-  NAME        name of the proxy and his services
+  NAME        name of the proxy and its services
   W           configured weight of the service
   STATUS      service status (UP/DOWN/NOLB/MAINT/MAINT(via)...)
   CHECK       status of last health check (see status reference below)
@@ -256,3 +240,24 @@ Health check status reference
   L7RSP       layer 7 invalid response - protocol error
   L7STS       layer 7 response error, for example HTTP 5xx
 
+
+Authors
+=======
+
+HATop was originally written by John Feuerstein <john@feurix.com>,
+known on GitHub as @feurix.
+
+As of 2020, however, support for Python 2.x is being phased out
+of modern distributions of Linux, the last code interaction on the
+upstream repository (<https://github.com/feurix/hatop>) is from
+over four years ago, and no issue or pull request has been able to
+elicit a response from the author.
+
+As of February 29th, I have forked this repository into my own
+GitHub org, at <https://github.com/jhunt/hatop>, with the intent
+of merging some of the upstream pull requests, and continuing
+ongoing maintenance of this tool.
+
+I have been an avid user of HATop since I first discovered it many
+many years ago, and would like to continue to be able to use it
+for many many more.
