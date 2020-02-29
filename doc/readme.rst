@@ -1,4 +1,4 @@
 .. _readme:
 
-.. include:: ../README
+.. include:: ../README.rst
 

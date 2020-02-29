@@ -1,4 +1,4 @@
 .. _install:
 
-.. include:: ../INSTALL
+.. include:: ../INSTALL.rst
 

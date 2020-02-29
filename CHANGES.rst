@@ -8,6 +8,18 @@ For the full changelog refer to the
 `Git version history <http://labs.feurix.org/admin/hatop/log/>`_.
 
 
+HATop 0.8
+=========
+
+HATop is now compatible with Python 3.
+
+
+HATop 0.8.0
+-----------
+
+*Not released yet.*
+
+
 HATop 0.7
 =========
 

@@ -1,4 +1,4 @@
 .. _changes:
 
-.. include:: ../CHANGES
+.. include:: ../CHANGES.rst
 
