@@ -4,20 +4,27 @@ Changelog
 
 This is a brief overview of the changes introduced by each version.
 
-For the full changelog refer to the
-`Git version history <http://labs.feurix.org/admin/hatop/log/>`_.
-
 
 HATop 0.8
 =========
 
 HATop is now compatible with Python 3.
 
+James Hunt has officially taken over maintainership of this project.
+Work will continue on GitHub at https://github.com/jhunt/hatop.
+
 
 HATop 0.8.0
 -----------
 
-*Not released yet.*
+:Date: Jul 30, 2020
+
+- Feature: Support for Python3
+
+- Feature: Bump max services from 100 -> 1000
+
+- Feature: Support for connecting to HAProxy via a TCP socket.
+  (Andrew Hayworth)
 
 
 HATop 0.7
