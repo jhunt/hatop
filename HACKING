@@ -1,9 +1,9 @@
 # Copyright (C) 2011 John Feuerstein <john@feurix.com>
 # HATop hacking...
 
-Development:    http://labs.feurix.org/admin/hatop/
+Development:    https://github.com/jhunt/hatop
 
-Git:            git clone git://labs.feurix.org/feurix/admin/hatop.git
+Git:            git clone https://github.com/jhunt/hatop.git
 
 
 
