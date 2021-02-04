@@ -56,6 +56,9 @@ Some common administrative actions have hotkeys:
 
 Hotkey      Action
 
+F1          Enable server on all backends (return from maintenance mode)
+F2          Disable server on all backends (put into maintenance mode)
+
 F4          Restore initial server weight
 
 F5          Decrease server weight:     - 10
@@ -63,8 +66,8 @@ F6          Decrease server weight:     -  1
 F7          Increase server weight:     +  1
 F8          Increase server weight:     + 10
 
-F9          Enable server (return from maintenance mode)
-F10         Disable server (put into maintenance mode)
+F9          Enable server on one backend (return from maintenance mode)
+F10         Disable server on one backend (put into maintenance mode)
 
 Hotkey actions and server responses are logged on the CLI viewport.
 You can scroll the output on the CLI view using PGUP / PGDOWN.
@@ -1162,9 +1165,10 @@ class Screen:
                 self.addstr(ypos, 1, 'HOTKEYS:',
                         curses.A_BOLD | curses.A_REVERSE)
                 self.addstr(ypos, 11,
+                        'F1=ENABLE_ALL_BACK  F2=DISABLE_ALL_BACK  '
                         'F4=W-RESET  '
                         'F5=W-10  F6=W-1  F7=W+1  F8=W+10  '
-                        'F9=ENABLE  F10=DISABLE',
+                        'F9=ENABLE_ONE_BACK  F10=DISABLE_ONE_BACK',
                         curses.A_NORMAL | curses.A_REVERSE)
                 return
 
@@ -1858,13 +1862,15 @@ def mainloop(screen, interval):
         # Toggle hotkey footer
         if screen.hotkeys:
             if c not in (
+                    curses.KEY_F1,          # enable server on all backends
+                    curses.KEY_F2,          # disable server on all backends
                     curses.KEY_F4,          # reset weight
                     curses.KEY_F5,          # weight -10
                     curses.KEY_F6,          # weight -1
                     curses.KEY_F7,          # weight +1
                     curses.KEY_F8,          # weight +10
-                    curses.KEY_F9,          # enable server
-                    curses.KEY_F10,         # disable server
+                    curses.KEY_F9,          # enable server on one backend
+                    curses.KEY_F10,         # disable server on one backend
             ):
                 screen.hotkeys = False
                 update_display = True
@@ -1958,13 +1964,15 @@ def mainloop(screen, interval):
                     curses.KEY_ENTER,       # show hotkeys
                     chr(curses.ascii.CR),   # show hotkeys
                     chr(curses.ascii.SP),   # copy & paste identifier
+                    curses.KEY_F1,          # enable server on all backends
+                    curses.KEY_F2,          # disable server on all backends
                     curses.KEY_F4,          # reset weight
                     curses.KEY_F5,          # weight -10
                     curses.KEY_F6,          # weight -1
                     curses.KEY_F7,          # weight +1
                     curses.KEY_F8,          # weight +10
-                    curses.KEY_F9,          # enable server
-                    curses.KEY_F10,         # disable server
+                    curses.KEY_F9,          # enable server on one backend
+                    curses.KEY_F10,         # disable server on one backend
             ):
                 if screen.data.socket.ro:
                     continue
@@ -1995,6 +2003,23 @@ def mainloop(screen, interval):
                         screen.switch_mode(5)
                         update_display = True
                         continue
+                elif c == curses.KEY_F1 or c == curses.KEY_F2:
+                    cliname = 'enable server'
+                    if c == curses.KEY_F2:
+                        cliname = 'disable server'
+
+                    # loop on all proxies (backends)
+                    for px in screen.data.stat.values():
+                        # in a given proxy, loop on all services id (unique inside a proxy)
+                        # a service can be a frontend, backend, server or socket object
+                        for sv in px.values():
+                            if sv['type'] == 2: # only the type "server" interests us
+                                # selects only the service name (hostname)
+                                # which matches that of the current line
+                                if sv['svname'] == svname:
+                                    screen.cli.execute_cmdline(
+                                            '%s %s/%s' % (cliname, sv['pxname'], svname))
+                                    notify = True
                 elif c == curses.KEY_F4:
                     screen.cli.execute_cmdline(
                             'set weight %s/%s 100%%' % (pxname, svname))
