@@ -253,7 +253,7 @@ upstream repository (<https://github.com/feurix/hatop>) is from
 over four years ago, and no issue or pull request has been able to
 elicit a response from the author.
 
-As of February 29th, I have forked this repository into my own
+As of February 29th (2020), I have forked this repository into my own
 GitHub org, at <https://github.com/jhunt/hatop>, with the intent
 of merging some of the upstream pull requests, and continuing
 ongoing maintenance of this tool.
@@ -261,3 +261,15 @@ ongoing maintenance of this tool.
 I have been an avid user of HATop since I first discovered it many
 many years ago, and would like to continue to be able to use it
 for many many more.
+
+Contributors
+============
+
+The following people have contributed to HATop:
+
+  - Andrew Hayworth
+  - Cyril Bonté
+  - James Hunt
+  - John Feuerstein
+  - Louis Charreau
+  - Matt Behrens
