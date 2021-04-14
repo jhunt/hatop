@@ -1165,10 +1165,10 @@ class Screen:
                 self.addstr(ypos, 1, 'HOTKEYS:',
                         curses.A_BOLD | curses.A_REVERSE)
                 self.addstr(ypos, 11,
-                        'F1=ENABLE_ALL_BACK  F2=DISABLE_ALL_BACK  '
+                        'F1=ENABLE  F2=DISABLE  '
                         'F4=W-RESET  '
                         'F5=W-10  F6=W-1  F7=W+1  F8=W+10  '
-                        'F9=ENABLE_ONE_BACK  F10=DISABLE_ONE_BACK',
+                        'F9=ENABLE (HERE)  F10=DISABLE (HERE)',
                         curses.A_NORMAL | curses.A_REVERSE)
                 return
 
