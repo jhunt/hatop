@@ -1,0 +1,89 @@
+#!/bin/bash
+# vim:et:sts=2:ts=2:sw=2
+set -eu
+
+INSTANCES=${INSTANCES:-3}
+
+rm -rf nginx/
+mkdir nginx
+for n in $(seq 1 $INSTANCES); do
+  cp -a template nginx/app${n}
+  sed -e "s/{{N}}/$n/" template/index.html > nginx/app${n}/index.html
+done
+
+(
+cat <<EOF
+# test haproxy
+global
+  maxconn 1024
+  stats socket /run/haproxy/stat/admin.sock user haproxy group haproxy mode 660 level admin
+  #nbproc 2
+  nbthread 4
+
+defaults
+  timeout connect 10s
+  timeout client 30s
+  timeout server 30s
+  log global
+  mode http
+  option httplog
+
+EOF
+
+for n in $(seq 1 $INSTANCES); do
+cat <<EOF
+frontend fe${n}
+  bind 0.0.0.0:8${n}
+  default_backend be${n}
+
+backend be${n}
+  balance roundrobin
+  option httpchk HEAD /
+  default-server check maxconn 20
+  server app${n} app${n}:80 cookie app${n}
+
+EOF
+done
+
+cat <<EOF
+frontend fe0
+  bind 0.0.0.0:80
+  default_backend be0
+
+backend be0
+  balance roundrobin
+  option httpchk HEAD /
+  default-server check maxconn 20
+EOF
+for n in $(seq 1 $INSTANCES); do
+  echo "  server app${n} app${n}:80 cookie app${n}"
+done
+
+)>haproxy.cfg
+
+(
+cat <<EOF
+---
+version: '3'
+services:
+  haproxy:
+    image: haproxy
+    volumes:
+      - \$PWD/stat:/run/haproxy/stat
+      - \$PWD/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      - '8840:80'
+EOF
+for n in $(seq 1 $INSTANCES); do
+  echo "      - '884${n}:8${n}'"
+done
+
+for n in $(seq 1 $INSTANCES); do
+cat <<EOF
+  app${n}:
+    image: nginx
+    volumes:
+      - \$PWD/nginx/app${n}:/usr/share/nginx/html
+EOF
+done
+)>docker-compose.yml

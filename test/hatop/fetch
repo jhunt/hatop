@@ -1,0 +1,5 @@
+#!/bin/bash
+n=${1:-15}
+for x in $(seq 1 $n); do
+  curl -s http://127.0.0.1:8840 | grep h1
+done | sort | uniq -c
