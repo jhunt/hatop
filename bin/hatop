@@ -1419,21 +1419,21 @@ class StatusBar:
 
 def human_seconds(numeric):
     for minval, prefix in sorted(list(PREFIX_TIME.items()), reverse=True):
-        if (numeric/minval):
-            return '%d%s' % (numeric/minval, prefix)
-    return '%ds' % numeric
+        if (numeric//minval):
+            return '{}{}'.format(numeric//minval, prefix)
+    return '{}s'.format(numeric)
 
 def human_metric(numeric):
     for minval, prefix in sorted(list(PREFIX_METRIC.items()), reverse=True):
-        if (numeric/minval):
-            return '%d%s' % (numeric/minval, prefix)
-    return str(numeric)
+        if (numeric//minval):
+            return '{}{}'.format(numeric//minval, prefix)
+    return '{}'.format(numeric)
 
 def human_binary(numeric):
     for minval, prefix in sorted(list(PREFIX_BINARY.items()), reverse=True):
-        if (numeric/minval):
-            return '%.2f%s' % (float(numeric)/float(minval), prefix)
-    return '%dB' % numeric
+        if (numeric//minval):
+            return '{:.2f}{}'.format(numeric/minval, prefix)
+    return '{}B'.format(numeric)
 
 def trim(string, length):
     if len(string) <= length:
@@ -1441,7 +1441,7 @@ def trim(string, length):
     if length == 1:
         return string[0]
     if length > 5:
-        return '..%s' % string[-(length-2):]
+        return '..{}'.format(string[-(length-2):])
     return '...'
 
 # ------------------------------------------------------------------------- #
@@ -1754,11 +1754,11 @@ def get_screenline(mode, stat):
         value = stat[column.name]
 
         for filter in column.filters['always']:
-            value = list(filter(value))
+            value = filter(value)
 
         if len(str(value)) > column.width:
             for filter in column.filters['ondemand']:
-                value = list(filter(value))
+                value = filter(value)
 
         value = str(value)
         value = trim(value, column.width)
