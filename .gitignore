@@ -1,3 +1,5 @@
+scripts/tmp/*
+scripts/deb_custom_control
 *.py[co]
 *.swp
 *.tmp
