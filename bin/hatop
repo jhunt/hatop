@@ -695,7 +695,7 @@ class ScreenCLI:
         self.ibuf = list(self.ihist[-1])
         self.mvend()
 
-    def __next__(self):
+    def post(self):
         if len(self.ihist) == 0:
             return
         self.ihist.rotate(-1)
@@ -2100,7 +2100,7 @@ def mainloop(screen, interval):
             elif c == curses.KEY_UP:
                 screen.cli.prev()
             elif c == curses.KEY_DOWN:
-                next(screen.cli)
+                screen.cli.post()
 
             # output history
             elif c == curses.KEY_PPAGE:
