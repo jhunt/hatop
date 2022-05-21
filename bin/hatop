@@ -2,6 +2,7 @@
 # vim:ft=python
 #
 # Copyright (C) 2011 John Feuerstein <john@feurix.com>
+# Copyright (C) 2022 James Hunt <james@jameshunt.us>
 #
 #   Project URL: https://github.com/jhunt/hatop
 #
@@ -156,7 +157,7 @@ L7STS       layer 7 response error, for example HTTP 5xx
 __author__    = 'John Feuerstein <john@feurix.com>'
 __copyright__ = 'Copyright (C) 2011 %s' % __author__
 __license__   = 'GNU GPLv3'
-__version__   = '0.8.0'
+__version__   = '0.8.2'
 
 import fcntl
 import os

@@ -14,6 +14,24 @@ James Hunt has officially taken over maintainership of this project.
 Work will continue on GitHub at https://github.com/jhunt/hatop.
 
 
+HATop 0.8.2
+-----------
+
+:Date: May 21, 2022
+
+- Bugfix: in CLI mode, pressing the down arrow no longer crashes Python 2.x
+
+
+HATop 0.8.1
+-----------
+
+:Date: Apr 14, 2021
+
+- Feature: F1/F2 hot keys now affect ALL backends
+
+- Feature: New F9/F10 hot keys implement legacy F1/F2 behavior
+
+
 HATop 0.8.0
 -----------
 
