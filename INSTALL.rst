@@ -29,7 +29,7 @@ The installation is simple::
 
   $ install -m 755 bin/hatop /usr/local/bin
 
-  $ install -m 644 man/hatop.1 /usr/local/share/man/man1
+  $ install -m 644 man/hatop.1 /usr/local/share/man/man1/
   $ gzip /usr/local/share/man/man1/hatop.1
 
 
