@@ -24,7 +24,7 @@ fi
 # Info
 export PACKAGE_NAME="hatop"
 export PACKAGE_DESCRIPTION="An Interactive ncurses Client for HAProxy"
-export PACKAGE_VERSION="0.8.2-rc1"
+export PACKAGE_VERSION=$(cat ${BASE_DIR}/../bin/hatop | sed -n -E "s/^__version__\s+=\s+'([0-9\.]+)'\$/\1/p")
 export PACKAGE_PROGRAM="hatop"
 
 # Directories.
