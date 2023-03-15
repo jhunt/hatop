@@ -76,6 +76,15 @@ Copy and paste selected service identifier to the CLI
 Scroll the stat views to select a given service
 .SH HOTKEYS
 .TP
+\fBF1\fP
+Enable server on all backends (return from maintenance mode)
+.TP
+\fBF2\fP
+Disable server on all backends (put into maintenance mode)
+.TP
+\fBF3\fP
+Drain server on all backends (prepare for maintenance mode, don't allow new connections)
+.TP
 \fBF4\fP
 Restore initial server weight
 
@@ -94,10 +103,13 @@ Increase server weight:     + 10
 
 .TP
 \fBF9\fP
-Enable server (return from maintenance mode)
+Enable server on one backend (return from maintenance mode)
 .TP
 \fBF10\fP
-Disable server (put into maintenance mode)
+Disable server on one backend (put into maintenance mode)
+.TP
+\fBF11\fP
+Drain server on one backend (prepare for maintenance mode, don't allow new connections)
 .SH SEE ALSO
 .BR haproxy (1)
 

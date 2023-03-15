@@ -123,6 +123,9 @@ Hotkeys for common administrative actions
 ::
 
   Hotkey      Action
+  F1          Enable server on all backends (return from maintenance mode)
+  F2          Disable server on all backends (put into maintenance mode)
+  F3          Drain server on all backends (prepare for maintenance mode, don't allow new connections)
 
   F4          Restore initial server weight
 
@@ -131,8 +134,9 @@ Hotkeys for common administrative actions
   F7          Increase server weight:     +  1
   F8          Increase server weight:     + 10
 
-  F9          Enable server (return from maintenance mode)
-  F10         Disable server (put into maintenance mode)
+  F9          Enable server on one backend (return from maintenance mode)
+  F10         Disable server on one backend (put into maintenance mode)
+  F11         Drain server on one backend (prepare for maintenance mode, don't allow new connections)
 
 Hotkey actions and server responses are logged on the CLI viewport.
 
