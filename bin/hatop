@@ -1867,7 +1867,7 @@ def mainloop(screen, interval):
             if c not in (
                     curses.KEY_F1,          # enable server on all backends
                     curses.KEY_F2,          # disable server on all backends
-                    curses.KEY_F3,          # drain server on all backend
+                    curses.KEY_F3,          # drain server on all backends
                     curses.KEY_F4,          # reset weight
                     curses.KEY_F5,          # weight -10
                     curses.KEY_F6,          # weight -1
