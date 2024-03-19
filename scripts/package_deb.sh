@@ -12,6 +12,7 @@ else
 fi
 
 DISTRIB_ID=$(echo $DISTRIB_ID | tr '[:upper:]' '[:lower:]')
+DISTRIB_RELEASE_NUM=$(echo ${DISTRIB_RELEASE} | sed "s/\.//")
 
 # Default to 1 if no release is set.
 if [[ -z $RELEASE ]]; then
@@ -22,6 +23,14 @@ PACKAGE_FULLNAME="${PACKAGE_NAME}_${PACKAGE_VERSION}-${RELEASE}-${DISTRIB_ID}-${
 
 rm -fr ${PACKAGE_TMPDIR}
 
+# >= 20.04 does not have python 2.x, so depend on python3 and the python-is-python3
+# package that symlinks /usr/bin/python.
+if [ ${DISTRIB_RELEASE_NUM} -ge 2004 ]; then
+    DEPENDS="python3, python-is-python3"
+else :
+    DEPENDS="python (>= 2.4)"
+fi
+
 # Create debian files.
 mkdir -p ${PACKAGE_TMPDIR}/DEBIAN
 echo "Package: ${PACKAGE_NAME}
@@ -29,7 +38,7 @@ Version: ${PACKAGE_VERSION}-${RELEASE}
 Section: admin
 Priority: extra
 Architecture: all
-Depends: python (>= 2.4)
+Depends: $DEPENDS
 Homepage: https://github.com/jhunt/hatop
 Maintainer: James Hunt <james@jameshunt.us>
 Description: ${PACKAGE_DESCRIPTION}" &> ${PACKAGE_TMPDIR}/DEBIAN/control
