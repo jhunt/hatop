@@ -1288,7 +1288,7 @@ class ScreenHelp:
         self.ypos = 0
 
     def setup(self):
-        self.pad = curses.newpad(self.ymax + 1, self.xmax + 1)
+        self.pad = curses.newpad(self.ymax + 2, self.xmax + 22)
 
     def addstr(self, *args, **kwargs):
         return self.pad.addstr(*args, **kwargs)
@@ -1300,7 +1300,9 @@ class ScreenHelp:
                 self.screen.smax, self.xmax - 2)
 
     def draw(self):
-        self.addstr(0, 0, __doc__)
+        if __doc__:
+            truncate_help = (__doc__ or "No help available.")[:5000]
+            self.addstr(0, 0, truncate_help)
 
     def mvc(self, n):
         if n == 0:
